@@ -1,0 +1,25 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: orange;
+    padding: 10px;
+    color: white;
+    text-align: center;
+}
+
+h1, p{
+    text-align: center;
+}
+
+.card {
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 20px;
+    background-color: white;
+    margin: auto;
+    margin-left: 250px;
+    margin-top: 100px;
+    margin-right: 250px;
+}
