@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="tugas.css">
+    <script src="vue.js"></script>
+    <title>To Do List</title>
+</head>
+
+<body style="background: linear-gradient(to right, #ad5389, #3c1053);">
+    <div id="app">
+        <h1 style="text-align: center; margin-top: 30px; color: white;">To Do List &#9889</h1>
+        <div class="cardTugas">
+            <div class="form-group">
+                <label for="todo">What to do <span style="color: red;">*</span></label>
+                <input type="text" class="form-control" name="todo" id="todo1" v-model="dos.todo1" ><br>
+                <label for="todo2">Category <span style="color: red;">*</span></label>
+                <select v-model="dos.todo2" id="todo2" class="form-control" required>
+                    <option selected></option>
+                    <option>Penting</option>
+                    <option>Biasa</option>
+                    <option>Tidak Penting</option>
+                </select><br>
+                <label for="todo3">Notes</label>
+                <textarea v-model="dos.todo3" class="form-control" id="todo3"></textarea>
+                <p style="color: red;">{{dos.warning}}</p>
+                <div style="margin-top: 15px;">
+                    <button class="btn btn-warning" @click="checkToDo()" style="margin-top: 8px;">Save</button>
+                </div>
+                
+            </div>
+        </div>
+
+        <div v-if="todos != ''">
+            <h1 style="text-align: center; margin-top: 30px; color: white;">My List &#9924</h1>
+            <div class="cardTugas" style="margin-bottom: 100px;">
+                <table class="table" v-if="todos.length > 0">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Todo</th>
+                            <th scope="col" style="text-align: center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="(tod, index) in todos" :key="index">
+                        <td scope="row">{{index+1}}</td>
+                        <td style="line-height: 5px;">
+                            <div v-if="todos2[index] == 'Penting'">
+                                <p class="badge badge-danger">{{todos2[index]}}</p>
+                            </div>
+                            <div v-if="todos2[index] == 'Biasa'">
+                                <p class="badge badge-primary">{{todos2[index]}}</p>
+                            </div>
+                            <div v-if="todos2[index] == 'Tidak Penting'">
+                                <p class="badge badge-success">{{todos2[index]}}</p>
+                            </div>
+                            <h2 style="font-weight: bold;">{{tod}}</h2>
+                            <p style="font-size: smaller;">Notes : {{todos3[index]}}</p>
+                        </td>
+                        <td style="text-align: center;">
+                            <button class="btn btn-secondary" @click="deleteTodo(index)">Delete</button>
+                        </td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div v-if="todos == ''">
+            <p style="text-align: center; margin-top: 30px; color: white;">Make your list now !</p>
+        </div>
+        
+        <div class="footer">
+            <p style="margin-top: auto; margin-bottom: auto;">{{angela.nama}} | {{angela.npm}} | {{angela.kelas}}</p>
+        </div>
+        
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                todos: [],
+                todos2: [],
+                todos3: [],
+                dos: {
+                    todo1: '',
+                    todo2: '',
+                    todo3: '',
+                    warning: "",
+                },
+                angela:{
+                    nama: "Angela",
+                    npm: "180709700",
+                    kelas: "Kelas D",
+                },
+            },
+            methods: {
+                addTodo() {
+                    this.todos.push(this.dos.todo1);
+                    this.todos2.push(this.dos.todo2);
+                    this.todos3.push(this.dos.todo3);
+                    this.dos.todo1 = '';
+                    this.dos.todo2 = '';
+                    this.dos.todo3 = '';
+                },
+                deleteTodo(index) {
+                    this.todos.splice(index, 1);
+                    this.todos2.splice(index, 1);
+                    this.todos3.splice(index, 1);
+                },
+                checkToDo(){
+                    if(this.dos.todo1 == '' || this.dos.todo2 == '')
+                    {
+                        this.dos.warning = "Warning : Tidak berhasil save, inputan tidak valid";
+                    }
+                    else if(this.dos.todo3 == '')
+                    {
+                        this.dos.todo3 = "-";
+                    }
+                    if(this.dos.todo1 != '' && this.dos.todo2 != '')
+                    {
+                        this.dos.warning = "";
+                        this.addTodo();
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

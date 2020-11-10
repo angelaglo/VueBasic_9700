@@ -1,0 +1,22 @@
+
+.cardTugas{
+    margin-top: 20px!important; 
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.2);
+    border-radius: 5px;
+    padding: 20px;
+    background-color: white;
+    margin: 0 auto;
+    width: 600px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #FFC83D;
+    padding: 10px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+}
